@@ -126,7 +126,9 @@ class FloorMapViewModel : ViewModel() {
                 // ── 3. 배치 가능 CCTV (demo CCTV 포함) ─────────────────────
                 try {
                     val cctvResponse = service.getAvailableCctvsForMapBySpace(spaceId, mapId)
-                    _availableCctvs.value = if (cctvResponse.status == "success") cctvResponse.data else emptyList()
+                    // _availableCctvs.value = if (cctvResponse.status == "success") cctvResponse.data else emptyList()
+                    _availableCctvs.value = cctvResponse.data
+                    Log.d("[TEMP] _availableCctvs.value=${_availableCctvs.value}")
                     Log.d("FloorMapVM", "availableCctvs count=${_availableCctvs.value.size} items=${_availableCctvs.value.map { "${it.senName}(demo=${it.isDemo})" }}")
                 } catch (e: Exception) {
                     _availableCctvs.value = emptyList()
